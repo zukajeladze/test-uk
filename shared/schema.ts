@@ -93,13 +93,13 @@ export const settings = pgTable("settings", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   currency: text("currency").notNull().default("сом"),
   currencySymbol: text("currency_symbol").notNull().default("сом"),
-  siteName: text("site_name").notNull().default(" Deshevshe.ua"),
+  siteName: text("site_name").notNull().default("Deshevshe.ua"),
   language: text("language").notNull().default("ru"),
   headerTagline: text("header_tagline").default("Пенни-аукционы в Кыргызстане"),
   footerDescription: text("footer_description").default("Первая пенни-аукционная платформа в Кыргызстане. Выигрывайте премиальные товары за копейки с нашей честной и прозрачной системой аукционов."),
   contactAddress: text("contact_address").default("г. Бишкек, ул. Чуй 154"),
   contactPhone: text("contact_phone").default("+996 (555) 123-456"),
-  contactEmail: text("contact_email").default("info@ Deshevshe.ua"),
+  contactEmail: text("contact_email").default("info@Deshevshe.ua"),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 

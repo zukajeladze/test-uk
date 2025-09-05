@@ -383,7 +383,7 @@ function RevolutionaryHero({ formatCurrency, auctionsData }: {
 }
 
 export default function Home() {
-  useDocumentTitle(" Deshevshe.ua - №1 Пенни-аукционы в Кыргызстане | Выиграй iPhone за копейки");
+  useDocumentTitle("Deshevshe.ua - №1 Пенни-аукционы в Кыргызстане | Выиграй iPhone за копейки");
   
   const { connected } = useSocket();
   const { user, isAuthenticated } = useAuth();

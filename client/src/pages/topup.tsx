@@ -66,7 +66,7 @@ export default function TopUp() {
 
   useEffect(() => {
     // Set page title
-    document.title = `${t('topUpBalance')} -  Deshevshe.ua`;
+    document.title = `${t('topUpBalance')} - Deshevshe.ua`;
     
     // Set viewport meta tag
     const viewportMeta = document.querySelector('meta[name="viewport"]');
@@ -80,11 +80,11 @@ export default function TopUp() {
     // Set description meta tag
     const descriptionMeta = document.querySelector('meta[name="description"]');
     if (descriptionMeta) {
-      descriptionMeta.setAttribute('content', 'Пополните баланс для участия в аукционах  Deshevshe.ua');
+      descriptionMeta.setAttribute('content', 'Пополните баланс для участия в аукционах Deshevshe.ua');
     } else {
       const meta = document.createElement('meta');
       meta.name = 'description';
-      meta.content = 'Пополните баланс для участия в аукционах  Deshevshe.ua';
+      meta.content = 'Пополните баланс для участия в аукционах Deshevshe.ua';
       document.head.appendChild(meta);
     }
   }, [t]);

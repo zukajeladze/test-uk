@@ -7,14 +7,14 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 export default function Support() {
-  useDocumentTitle("Служба поддержки -  Deshevshe.ua | Помощь и поддержка пользователей");
+  useDocumentTitle("Служба поддержки - Deshevshe.ua | Помощь и поддержка пользователей");
 
   const supportMethods = [
     {
       icon: "fas fa-envelope",
       title: "Электронная почта",
       description: "Напишите нам на email для получения подробной помощи",
-      contact: "support@ Deshevshe.ua",
+      contact: "support@Deshevshe.ua",
       responseTime: "В течение 24 часов",
       color: "blue"
     },
@@ -222,7 +222,7 @@ export default function Support() {
                 <div>
                   <h3 className="text-2xl font-black text-white">Часто задаваемые вопросы</h3>
                   <p className="text-white/70 mt-2">
-                    Ответы на самые популярные вопросы о работе  Deshevshe.ua
+                    Ответы на самые популярные вопросы о работе Deshevshe.ua
                   </p>
                 </div>
               </div>

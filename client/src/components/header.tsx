@@ -104,7 +104,7 @@ export function Header() {
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {settings?.siteName || " Deshevshe.ua"}
+                  {settings?.siteName || "Deshevshe.ua"}
                 </motion.h1>
                 <p className="text-xs text-white/70 font-medium">
                   {settings?.headerTagline || "Пенни-аукционы в Кыргызстане"}
@@ -116,7 +116,7 @@ export function Header() {
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {settings?.siteName || " Deshevshe.ua"}
+                  {settings?.siteName || "Deshevshe.ua"}
                 </motion.h1>
               </div>
             </Link>
@@ -248,7 +248,7 @@ export function Header() {
                       </motion.div>
                       <div>
                         <SheetTitle className="text-white text-xl font-black bg-gradient-to-r from-white to-neon-300 bg-clip-text text-transparent">
-                          {settings?.siteName || " Deshevshe.ua"}
+                          {settings?.siteName || "Deshevshe.ua"}
                         </SheetTitle>
                         <p className="text-white/70 text-sm font-medium">
                           {settings?.language === "ru" && "Пенни-аукционы"}

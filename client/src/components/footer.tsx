@@ -53,7 +53,7 @@ export function Footer() {
                 />
               </motion.div>
               <h3 className="text-2xl font-black bg-gradient-to-r from-white to-neon-300 bg-clip-text text-transparent">
-                {settings?.siteName || " Deshevshe.ua"}
+                {settings?.siteName || "Deshevshe.ua"}
               </h3>
             </motion.div>
             <p className="text-white/70 leading-relaxed">
@@ -183,7 +183,7 @@ export function Footer() {
               {[
                 { icon: "fas fa-map-marker-alt", text: "г. Бишкек, ул. Чуй 154", color: 'brand' },
                 { icon: "fas fa-phone", text: "+996 (555) 123-456", color: 'electric' },
-                { icon: "fas fa-envelope", text: "info@ Deshevshe.ua", color: 'neon' },
+                { icon: "fas fa-envelope", text: "info@Deshevshe.ua", color: 'neon' },
                 { icon: "fas fa-clock", text: t("support24x7"), color: 'sunset' }
               ].map((contact, index) => (
                 <motion.div 
@@ -341,7 +341,7 @@ export function Footer() {
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-white/60 text-sm">
-              © {new Date().getFullYear()} {settings?.siteName || " Deshevshe.ua"}. 
+              © {new Date().getFullYear()} {settings?.siteName || "Deshevshe.ua"}. 
               {settings?.language === "ru" && " Все права защищены."}
               {settings?.language === "en" && " All rights reserved."}
               {settings?.language === "ka" && " ყველა უფლება დაცულია."}

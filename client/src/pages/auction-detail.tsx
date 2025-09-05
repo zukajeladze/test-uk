@@ -58,7 +58,7 @@ function FakeVisitorsBadge({ auction }: { auction: Auction }) {
         const change = Math.floor(Math.random() * 7) - 3; // ±3 visitors
         return Math.max(25, Math.min(150, prev + change));
       });
-    }, 15000 + Math.random() * 15000);
+    }, 15000 + Math.floor(Math.random() * 15000));
 
     // Add new recent joiners every 8-25 seconds
     const joinersInterval = setInterval(() => {
@@ -67,7 +67,7 @@ function FakeVisitorsBadge({ auction }: { auction: Auction }) {
         const newJoiners = [randomName, ...prev.filter(name => name !== randomName)];
         return newJoiners.slice(0, 3); // Keep only last 3 joiners
       });
-    }, 8000 + Math.random() * 17000);
+    }, 8000 + Math.floor(Math.random() * 17000));
 
     return () => {
       clearInterval(visitorInterval);
@@ -205,7 +205,7 @@ export default function AuctionDetail() {
     onSuccess: () => {
       // Track successful bid placement
       if (auction) {
-        trackBidPlaced(auction.bidIncrement, auction.id);
+        trackBidPlaced(Number(auction.bidIncrement), auction.id);
       }
       
       toast({
@@ -358,12 +358,22 @@ export default function AuctionDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
         <Header />
-        <div className="max-w-[1504px] mx-auto px-4 py-8 flex items-center justify-center">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-gray-600">{t("loading")} {t("auction").toLowerCase()}...</p>
+        <div className="relative overflow-hidden">
+          {/* Cyber grid background */}
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 opacity-20 cyber-grid" />
+          </div>
+          
+          <div className="relative z-10 max-w-[1600px] mx-auto px-6 py-16 flex items-center justify-center min-h-[80vh]">
+            <div className="text-center">
+              <div className="relative">
+                <div className="w-24 h-24 border-4 border-neon-400/30 border-t-neon-400 rounded-full animate-spin mx-auto mb-6"></div>
+                <div className="absolute inset-0 w-24 h-24 border-4 border-brand-400/20 border-b-brand-400 rounded-full animate-spin mx-auto" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
+              </div>
+              <p className="text-white/80 text-lg">{t("loading")} {t("auction").toLowerCase()}...</p>
+            </div>
           </div>
         </div>
       </div>
@@ -372,16 +382,29 @@ export default function AuctionDetail() {
 
   if (!auction) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
         <Header />
-        <div className="max-w-[1504px] mx-auto px-4 py-8 flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">{t("auction")} not found</h1>
-            <p className="text-gray-600 mb-6">The auction may have been deleted or doesn't exist</p>
-            <Button onClick={() => setLocation("/")}>
-              <i className="fas fa-arrow-left mr-2"></i>
-              {t("home")}
-            </Button>
+        <div className="relative overflow-hidden">
+          {/* Cyber grid background */}
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 opacity-20 cyber-grid" />
+          </div>
+          
+          <div className="relative z-10 max-w-[1600px] mx-auto px-6 py-16 flex items-center justify-center min-h-[80vh]">
+            <div className="text-center bg-gray-800/50 backdrop-blur-xl border border-red-400/30 rounded-3xl p-12">
+              <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i className="fas fa-exclamation-triangle text-red-400 text-3xl"></i>
+              </div>
+              <h1 className="text-3xl font-black text-white mb-4">{t("auction")} not found</h1>
+              <p className="text-white/70 mb-8 text-lg">The auction may have been deleted or doesn't exist</p>
+              <Button 
+                onClick={() => setLocation("/")}
+                className="bg-brand-gradient hover:shadow-xl text-white font-bold px-8 py-3 rounded-xl border border-white/20"
+              >
+                <i className="fas fa-arrow-left mr-2"></i>
+                {t("home")}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -389,131 +412,147 @@ export default function AuctionDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
       <Header />
       
-      {/* Breadcrumb Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-[1504px] mx-auto px-4 py-4">
-          <div className="flex items-center justify-between flex-wrap gap-3">
-            <div className="flex items-center space-x-2 md:space-x-4 min-w-0 flex-1">
-              <Button
-                variant="ghost"
-                onClick={() => setLocation("/")}
-                className="flex items-center space-x-2 flex-shrink-0"
-                size="sm"
-              >
-                <i className="fas fa-arrow-left"></i>
-                <span className="hidden sm:inline">{t("back")}</span>
-              </Button>
-              <div className="h-6 w-px bg-gray-300 hidden sm:block"></div>
-              <div className="min-w-0 flex-1">
-                <h1 className="text-lg md:text-xl font-bold text-gray-900 truncate">{auction.title}</h1>
+      {/* Enhanced background */}
+      <div className="relative overflow-hidden">
+        {/* Cyber grid background */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 opacity-20 cyber-grid" />
+          
+          {/* Floating orbs */}
+          <div className="absolute top-1/4 left-1/6 w-64 h-64 bg-neon-500/10 rounded-full blur-3xl animate-float" />
+          <div className="absolute bottom-1/4 right-1/6 w-48 h-48 bg-brand-500/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
+        </div>
+        
+        {/* Futuristic Breadcrumb Header */}
+        <div className="relative z-10 bg-gray-900/80 backdrop-blur-xl border-b border-neon-400/20 shadow-2xl">
+          <div className="max-w-[1600px] mx-auto px-6 py-6">
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <div className="flex items-center space-x-4 min-w-0 flex-1">
+                <Button
+                  variant="ghost"
+                  onClick={() => setLocation("/")}
+                  className="flex items-center space-x-2 flex-shrink-0 bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-neon-400/50 rounded-xl backdrop-blur-sm transition-all"
+                  size="sm"
+                >
+                  <i className="fas fa-arrow-left"></i>
+                  <span className="hidden sm:inline">{t("back")}</span>
+                </Button>
+                <div className="h-6 w-px bg-neon-400/30 hidden sm:block"></div>
+                <div className="min-w-0 flex-1">
+                  <h1 className="text-xl md:text-2xl font-black text-white truncate bg-gradient-to-r from-white to-neon-200 bg-clip-text text-transparent">
+                    {auction.title}
+                  </h1>
+                </div>
               </div>
+              
+              {/* Futuristic Auction ID Badge */}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  navigator.clipboard.writeText(auction.displayId);
+                  toast({
+                    title: "Скопировано!",
+                    description: `ID аукциона ${auction.displayId} скопирован в буфер обмена`,
+                  });
+                }}
+                className="flex items-center space-x-2 bg-brand-500/20 hover:bg-brand-500/30 border-brand-400/50 text-brand-300 hover:text-brand-200 rounded-xl backdrop-blur-sm transition-all flex-shrink-0"
+              >
+                <i className="fas fa-tag text-brand-400"></i>
+                <span className="font-mono text-xs sm:text-sm font-bold">{auction.displayId}</span>
+                <i className="fas fa-copy text-xs text-brand-400/60"></i>
+              </Button>
             </div>
-            
-            {/* Auction ID Badge - Right Side */}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => {
-                navigator.clipboard.writeText(auction.displayId);
-                toast({
-                  title: "Скопировано!",
-                  description: `ID аукциона ${auction.displayId} скопирован в буфер обмена`,
-                });
-              }}
-              className="flex items-center space-x-2 hover:bg-blue-50 border-blue-200 flex-shrink-0"
-            >
-              <i className="fas fa-tag text-blue-600"></i>
-              <span className="font-mono text-blue-600 text-xs sm:text-sm">{auction.displayId}</span>
-              <i className="fas fa-copy text-xs text-blue-400"></i>
-            </Button>
           </div>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="max-w-[1504px] mx-auto px-4 py-4 md:py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-          {/* Left Column - Auction Details */}
-          <div className="lg:col-span-2 space-y-4 md:space-y-6">
-            {/* Modern Auction Card */}
-            <Card className="overflow-hidden border-0 shadow-xl bg-gradient-to-br from-white to-gray-50">
-              <CardContent className="p-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 min-h-[400px] md:min-h-[500px]">
-                  {/* Modern Image Section */}
+        {/* Main Content */}
+        <div className="relative z-10 max-w-[1600px] mx-auto px-6 py-8 md:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+            {/* Left Column - Auction Details */}
+            <div className="lg:col-span-2 space-y-8">
+              {/* Futuristic Auction Card */}
+              <div className="bg-gray-800/50 backdrop-blur-xl border border-neon-400/30 rounded-3xl shadow-2xl overflow-hidden hover:shadow-neon-400/20 hover:shadow-2xl transition-all duration-500">
+                <div className="grid grid-cols-1 md:grid-cols-2 min-h-[500px] md:min-h-[600px]">
+                  {/* Futuristic Image Section */}
                   <div className="relative group overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-purple-600/10 z-10"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-neon-600/20 to-brand-600/20 z-10"></div>
                     <img
                       src={auction.imageUrl}
                       alt={auction.title}
-                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1"
+                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                     />
                     
-                    {/* Modern Status Badge */}
+                    {/* Futuristic Status Badge */}
                     <div className="absolute top-6 left-6 z-20">
-                      <div className="backdrop-blur-xl bg-white/30 rounded-2xl p-2 border border-white/40">
+                      <div className="bg-gray-900/80 backdrop-blur-xl rounded-2xl p-3 border border-neon-400/40 shadow-lg">
                         {getStatusBadge(auction.status)}
                       </div>
                     </div>
                     
-                    {/* Auction ID Badge */}
+                    {/* Futuristic ID Badge */}
                     <div className="absolute top-6 right-6 z-20">
-                      <div className="backdrop-blur-xl bg-black/40 text-white px-4 py-2 rounded-full text-sm font-semibold border border-white/20">
+                      <div className="bg-brand-500/20 backdrop-blur-xl text-brand-300 px-4 py-2 rounded-full text-sm font-bold border border-brand-400/40 shadow-lg">
                         <i className="fas fa-tag mr-2"></i>
                         {auction.displayId}
                       </div>
                     </div>
                     
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10"></div>
+                    {/* Cyber Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-transparent to-transparent z-10"></div>
                     
-                    {/* Price Cards - Floating Over Image */}
-                    <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 z-20">
-                      <div className="backdrop-blur-xl bg-white/20 rounded-2xl p-3 md:p-4 border border-white/30">
+                    {/* Floating Price Card */}
+                    <div className="absolute bottom-6 left-6 right-6 z-20">
+                      <div className="bg-gray-900/80 backdrop-blur-xl rounded-2xl p-4 border border-neon-400/40 shadow-2xl">
                         <div className="flex items-center justify-between text-white">
                           <div>
-                            <p className="text-xs font-medium opacity-80">{t("currentPrice")}</p>
-                            <p className="text-lg md:text-xl font-bold">{formatCurrency(auction.currentPrice)}</p>
+                            <p className="text-xs font-medium text-neon-300 mb-1">{t("currentPrice")}</p>
+                            <p className="text-2xl font-black bg-gradient-to-r from-neon-400 to-brand-400 bg-clip-text text-transparent">
+                              {formatCurrency(auction.currentPrice)}
+                            </p>
                           </div>
-                          <i className="fas fa-chart-line text-xl md:text-2xl opacity-60"></i>
+                          <div className="w-12 h-12 bg-neon-500/20 rounded-full flex items-center justify-center">
+                            <i className="fas fa-chart-line text-neon-400 text-xl"></i>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Details Section */}
-                  <div className="p-4 md:p-8 flex flex-col justify-between bg-gradient-to-br from-white to-slate-50">
-                    <div className="space-y-4 md:space-y-6">
+                  {/* Futuristic Details Section */}
+                  <div className="p-6 md:p-8 flex flex-col justify-between bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm">
+                    <div className="space-y-6 md:space-y-8">
                       <div>
-                        <p className="text-gray-600 leading-relaxed text-base md:text-lg">{auction.description}</p>
+                        <p className="text-white/80 leading-relaxed text-base md:text-lg">{auction.description}</p>
                       </div>
 
                       {/* Timer and Status Section */}
                       {auction.status === "live" && (
-                        <div className="bg-gradient-to-r from-red-50 to-orange-50 rounded-2xl p-4 md:p-6 border border-red-200 shadow-lg">
+                        <div className="bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6 border border-red-500/30 shadow-[0_0_30px_rgba(239,68,68,0.2)]">
                           <div className="text-center">
-                            <p className="text-red-600 font-semibold mb-2 md:mb-3 flex items-center justify-center text-sm md:text-base">
+                            <p className="text-red-400 font-bold mb-3 flex items-center justify-center text-base md:text-lg">
                               <i className="fas fa-fire mr-2 animate-pulse"></i>
-{t("auctionActive")}
+                              {t("auctionActive")}
                             </p>
-                            <div className="text-3xl md:text-5xl font-bold text-red-700 font-mono mb-2 tracking-wide">
+                            <div className="text-4xl md:text-6xl font-black text-transparent bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text font-mono mb-3 tracking-wider">
                               {formatTime(getTimerValue())}
                             </div>
-                            <p className="text-xs md:text-sm text-red-600 uppercase tracking-wide">{t("untilCompletion")}</p>
+                            <p className="text-sm text-red-400/80 uppercase tracking-widest">{t("untilCompletion")}</p>
                           </div>
                         </div>
                       )}
 
                       {auction.status === "upcoming" && (
-                        <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl p-4 md:p-6 border border-yellow-200 shadow-lg">
+                        <div className="bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6 border border-yellow-500/30 shadow-[0_0_30px_rgba(234,179,8,0.2)]">
                           <div className="text-center">
-                            <p className="text-yellow-600 font-semibold mb-2 md:mb-3 flex items-center justify-center text-sm md:text-base">
-                              <i className="fas fa-clock mr-2"></i>
+                            <p className="text-yellow-400 font-bold mb-3 flex items-center justify-center text-base md:text-lg">
+                              <i className="fas fa-clock mr-2 animate-pulse"></i>
                               {t("startsIn")}
                             </p>
-                            <div className="text-3xl md:text-5xl font-bold text-yellow-700 font-mono mb-2 tracking-wide">
+                            <div className="text-4xl md:text-6xl font-black text-transparent bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text font-mono mb-3 tracking-wider">
                               {formatTime(getTimerValue())}
                             </div>
                           </div>
@@ -521,41 +560,45 @@ export default function AuctionDetail() {
                       )}
 
                       {auction.status === "finished" && (
-                        <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-200 shadow-lg">
+                        <div className="bg-gray-900/60 backdrop-blur-xl rounded-2xl p-8 border border-brand-500/30 shadow-[0_0_30px_rgba(14,165,233,0.2)]">
                           <div className="text-center">
-                            <div className="flex justify-center mb-4">
-                              <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full p-4 shadow-xl">
-                                <i className="fas fa-crown text-white text-3xl"></i>
+                            <div className="flex justify-center mb-6">
+                              <div className="bg-gradient-to-r from-brand-400 to-neon-400 rounded-full p-6 shadow-[0_0_30px_rgba(14,165,233,0.3)]">
+                                <i className="fas fa-crown text-white text-4xl"></i>
                               </div>
                             </div>
-                            <h3 className="text-2xl font-bold text-purple-800 mb-4">🎉 {t("auctionFinished")}</h3>
+                            <h3 className="text-3xl font-black text-transparent bg-gradient-to-r from-brand-400 to-neon-400 bg-clip-text mb-6">
+                              🎉 {t("auctionFinished")}
+                            </h3>
                             
                             {bids.length > 0 && (
-                              <div className="bg-white rounded-xl p-6 mt-4 shadow-lg border">
-                                <p className="text-purple-600 font-medium mb-3">{t("winner")}:</p>
-                                <div className="flex items-center justify-center space-x-3">
-                                  <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                                    <i className="fas fa-user text-white"></i>
+                              <div className="bg-gray-800/60 backdrop-blur-xl rounded-2xl p-6 mt-6 border border-brand-400/30">
+                                <p className="text-brand-400 font-bold mb-4">{t("winner")}:</p>
+                                <div className="flex items-center justify-center space-x-4">
+                                  <div className="w-12 h-12 bg-gradient-to-r from-brand-500 to-neon-500 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(14,165,233,0.3)]">
+                                    <i className="fas fa-user text-white text-xl"></i>
                                   </div>
                                   <div>
-                                    <p className="font-bold text-xl text-purple-800">
+                                    <p className="font-black text-2xl text-transparent bg-gradient-to-r from-brand-400 to-neon-400 bg-clip-text">
                                       {bids[0].isBot ? bids[0].botName : bids[0].user?.username}
                                     </p>
-                                    <p className="text-sm text-purple-600">
+                                    <p className="text-sm text-brand-400/80">
                                       {t("winner")}
                                     </p>
                                   </div>
                                 </div>
-                                <div className="mt-4 pt-4 border-t border-purple-200">
-                                  <p className="text-purple-600 font-medium">{t("winningBid")}:</p>
-                                  <p className="text-3xl font-bold text-purple-800">{formatCurrency(bids[0].amount)}</p>
+                                <div className="mt-6 pt-6 border-t border-brand-400/20">
+                                  <p className="text-brand-400 font-bold mb-2">{t("winningBid")}:</p>
+                                  <p className="text-4xl font-black text-transparent bg-gradient-to-r from-brand-400 to-neon-400 bg-clip-text">
+                                    {formatCurrency(bids[0].amount)}
+                                  </p>
                                 </div>
                               </div>
                             )}
                             
                             {bids.length === 0 && (
-                              <div className="bg-white rounded-xl p-6 mt-4 shadow-lg border">
-                                <p className="text-purple-600">{t("noBidsNoWinner")}</p>
+                              <div className="bg-gray-800/60 backdrop-blur-xl rounded-2xl p-6 mt-6 border border-brand-400/30">
+                                <p className="text-brand-400">{t("noBidsNoWinner")}</p>
                               </div>
                             )}
                           </div>
@@ -564,12 +607,12 @@ export default function AuctionDetail() {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="space-y-4 mt-8">
+                    <div className="space-y-6 mt-8">
                       {auction.status === "upcoming" && (
                         <Button
                           onClick={handlePrebid}
                           disabled={prebidMutation.isPending || !isAuthenticated}
-                          className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white py-4 text-sm sm:text-lg font-semibold rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+                          className="w-full bg-sunset-gradient hover:opacity-90 text-white py-4 text-lg font-black rounded-xl border border-white/20 shadow-[0_0_30px_rgba(234,179,8,0.3)] hover:shadow-[0_0_40px_rgba(234,179,8,0.4)] transition-all duration-300"
                         >
                           {prebidMutation.isPending ? (
                             <>
@@ -589,7 +632,7 @@ export default function AuctionDetail() {
                         <Button
                           onClick={handleBid}
                           disabled={bidMutation.isPending || !isAuthenticated || (bids[0] && !bids[0].isBot && bids[0].user?.id === user?.id)}
-                          className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white py-4 text-sm sm:text-lg font-semibold rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+                          className="w-full bg-brand-gradient hover:opacity-90 text-white py-4 text-lg font-black rounded-xl border border-white/20 shadow-[0_0_30px_rgba(14,165,233,0.3)] hover:shadow-[0_0_40px_rgba(14,165,233,0.4)] transition-all duration-300"
                         >
                           {bidMutation.isPending ? (
                             <>
@@ -606,8 +649,8 @@ export default function AuctionDetail() {
                       )}
 
                       {!isAuthenticated && (auction.status === "live" || auction.status === "upcoming") && (
-                        <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-6 text-center border border-blue-200">
-                          <p className="text-gray-600 mb-4 text-lg">
+                        <div className="bg-gray-900/60 backdrop-blur-xl rounded-2xl p-8 text-center border border-neon-400/30">
+                          <p className="text-white/80 mb-6 text-lg">
                             {auction.status === "upcoming" 
                               ? t("loginForPrebids")
                               : t("loginToParticipate")
@@ -615,7 +658,7 @@ export default function AuctionDetail() {
                           </p>
                           <Button
                             onClick={() => window.location.href = "/login"}
-                            className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                            className="bg-neon-gradient hover:opacity-90 text-white px-8 py-3 rounded-xl border border-white/20 shadow-[0_0_30px_rgba(34,211,238,0.3)] hover:shadow-[0_0_40px_rgba(34,211,238,0.4)] transition-all duration-300"
                           >
                             <i className="fas fa-sign-in-alt mr-2"></i>
                             {t("login")}
@@ -625,200 +668,218 @@ export default function AuctionDetail() {
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Right Column - Bid History */}
-          <div className="space-y-4 md:space-y-6">
-            {/* Fake Visitors Badge for Samsung Galaxy Z Fold 7 */}
-            <FakeVisitorsBadge auction={auction} />
-            
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="flex items-center space-x-2 text-lg md:text-xl">
-                  <i className="fas fa-history text-blue-500"></i>
-                  <span>{t("bidHistory")}</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 md:space-y-3 max-h-80 md:max-h-96 overflow-y-auto">
-                  {bids.length === 0 ? (
-                    <div className="text-center py-8 text-gray-500">
-                      <i className="fas fa-gavel text-4xl mb-4 text-gray-300"></i>
-                      <p>{t("noBidsYet")}</p>
-                      <p className="text-sm">{t("beTheFirst")}</p>
-                    </div>
-                  ) : (
-                    bids.map((bid, index) => (
-                      <div
-                        key={bid.id}
-                        className={`flex items-center justify-between p-2 md:p-3 rounded-lg border ${
-                          bid.isPrebid 
-                            ? "bg-gradient-to-r from-orange-50 to-yellow-50 border-orange-200"
-                            : index === 0 
-                              ? "bg-gradient-to-r from-yellow-50 to-orange-50 border-yellow-200" 
-                              : "bg-gray-50 border-gray-200"
-                        }`}
-                      >
-                        <div className="flex items-center space-x-2 md:space-x-3 min-w-0 flex-1">
-                          <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full text-white flex items-center justify-center flex-shrink-0 ${
-                            bid.isPrebid ? "bg-orange-500" : "bg-blue-500"
-                          }`}>
-                            <i className={`text-xs md:text-sm ${bid.isPrebid ? "fas fa-hourglass-start" : "fas fa-user"}`}></i>
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <p className="font-medium text-gray-900 text-sm md:text-base truncate">
-                              {bid.isBot ? bid.botName : bid.user?.username}
-                              {bid.isPrebid && (
-                                <span className="ml-1 md:ml-2 text-xs bg-orange-500 text-white px-1 md:px-2 py-0.5 md:py-1 rounded-full">
-                                  {t("prebidShort")}
-                                </span>
-                              )}
-                              {!bid.isPrebid && index === 0 && (
-                                <span className="ml-1 md:ml-2 text-xs bg-yellow-500 text-white px-1 md:px-2 py-0.5 md:py-1 rounded-full">
-                                  {t("leader")}
-                                </span>
-                              )}
-                            </p>
-                            <p className="text-xs text-gray-500 truncate">
-                              {bid.isPrebid 
-                                ? t("prebid")
-                                : `${t("bidNumber")}${(stats?.totalBids || 0) - bids.filter((b, i) => i < index && !b.isPrebid).length}`
-                              }
-                            </p>
-                          </div>
-                        </div>
-                        <div className="text-right flex-shrink-0">
-                          <p className={`font-bold text-sm md:text-base ${bid.isPrebid ? "text-orange-600" : "text-gray-900"}`}>
-                            {formatCurrency(bid.amount)}
-                          </p>
-                          {bid.isPrebid && (
-                            <p className="text-xs text-orange-500">
-                              {t("oneBid")}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-
-
-          </div>
-        </div>
-
-        {/* How It Works Section */}
-        <div className="max-w-[1504px] mx-auto mt-8 md:mt-12">
-          <div className="bg-white rounded-2xl border border-gray-200 p-4 md:p-8">
-            <div className="text-center mb-6 md:mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 md:mb-3">{t("howPennyAuctionsWork")}</h2>
-              <p className="text-base md:text-lg text-gray-600">{t("understandingMechanics")}</p>
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-6 md:mb-8">
+            {/* Right Column - Bid History */}
+            <div className="space-y-6 md:space-y-8">
+              {/* Fake Visitors Badge for Samsung Galaxy Z Fold 7 */}
+              <FakeVisitorsBadge auction={auction} />
+              
+              <div className="bg-gray-900/60 backdrop-blur-xl rounded-2xl border border-brand-400/30 shadow-[0_0_30px_rgba(14,165,233,0.2)] overflow-hidden">
+                <div className="p-6">
+                  <div className="flex items-center space-x-3 mb-6">
+                    <div className="w-10 h-10 bg-brand-500/20 rounded-full flex items-center justify-center">
+                      <i className="fas fa-history text-brand-400 text-lg"></i>
+                    </div>
+                    <h2 className="text-xl font-black text-white">{t("bidHistory")}</h2>
+                  </div>
+                  
+                  <div className="space-y-3 max-h-[32rem] overflow-y-auto scrollbar-hide">
+                    {bids.length === 0 ? (
+                      <div className="text-center py-12">
+                        <div className="w-16 h-16 bg-gray-800/60 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <i className="fas fa-gavel text-brand-400 text-2xl"></i>
+                        </div>
+                        <p className="text-white/80 text-lg mb-2">{t("noBidsYet")}</p>
+                        <p className="text-brand-400/80 text-sm">{t("beTheFirst")}</p>
+                      </div>
+                    ) : (
+                      bids.map((bid, index) => (
+                        <div
+                          key={bid.id}
+                          className={`flex items-center justify-between p-4 rounded-xl border backdrop-blur-sm ${
+                            bid.isPrebid 
+                              ? "bg-sunset-500/10 border-sunset-400/30"
+                              : index === 0 
+                                ? "bg-brand-500/10 border-brand-400/30" 
+                                : "bg-gray-800/40 border-white/10"
+                          }`}
+                        >
+                          <div className="flex items-center space-x-3 min-w-0 flex-1">
+                            <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+                              bid.isPrebid 
+                                ? "bg-gradient-to-br from-sunset-500 to-sunset-600" 
+                                : "bg-gradient-to-br from-brand-500 to-brand-600"
+                            }`}>
+                              <i className={`text-white ${bid.isPrebid ? "fas fa-hourglass-start" : "fas fa-user"}`}></i>
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <p className="font-bold text-white text-base truncate flex items-center">
+                                {bid.isBot ? bid.botName : bid.user?.username}
+                                {bid.isPrebid && (
+                                  <span className="ml-2 text-xs bg-sunset-500/20 text-sunset-400 px-2 py-1 rounded-full border border-sunset-400/30">
+                                    {t("prebidShort")}
+                                  </span>
+                                )}
+                                {!bid.isPrebid && index === 0 && (
+                                  <span className="ml-2 text-xs bg-brand-500/20 text-brand-400 px-2 py-1 rounded-full border border-brand-400/30">
+                                    {t("leader")}
+                                  </span>
+                                )}
+                              </p>
+                              <p className="text-xs text-white/60">
+                                {bid.isPrebid 
+                                  ? t("prebid")
+                                  : `${t("bidNumber")}${(stats?.totalBids || 0) - bids.filter((b, i) => i < index && !b.isPrebid).length}`
+                                }
+                              </p>
+                            </div>
+                          </div>
+                          <div className="text-right flex-shrink-0">
+                            <p className={`font-black text-base ${
+                              bid.isPrebid ? "text-sunset-400" : "text-brand-400"
+                            }`}>
+                              {formatCurrency(bid.amount)}
+                            </p>
+                            {bid.isPrebid && (
+                              <p className="text-xs text-sunset-400/80">
+                                {t("oneBid")}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        {/* How It Works Section */}
+        <div className="relative z-10 max-w-[1600px] mx-auto mt-12 md:mt-16">
+          <div className="bg-gray-900/60 backdrop-blur-xl rounded-3xl border border-neon-400/30 p-8 md:p-12">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-black text-transparent bg-gradient-to-r from-white to-neon-200 bg-clip-text mb-4">
+                {t("howPennyAuctionsWork")}
+              </h2>
+              <p className="text-lg text-white/80">{t("understandingMechanics")}</p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
               {/* Step 1 */}
               <div className="text-center">
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                  <i className="fas fa-user-plus text-white text-lg md:text-xl"></i>
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-brand-gradient rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(14,165,233,0.3)]">
+                  <i className="fas fa-user-plus text-white text-2xl md:text-3xl"></i>
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-2 md:mb-3">1. {t("registration")}</h3>
-                <p className="text-sm md:text-base text-gray-600">{t("registrationDesc").replace("{oneBid}", t("oneBid")).replace("{currency}", formatCurrency(0.01))}</p>
+                <h3 className="text-xl font-black text-white mb-3">1. {t("registration")}</h3>
+                <p className="text-white/70">{t("registrationDesc").replace("{oneBid}", t("oneBid")).replace("{currency}", formatCurrency(0.01))}</p>
               </div>
 
               {/* Step 2 */}
               <div className="text-center">
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                  <i className="fas fa-gavel text-white text-lg md:text-xl"></i>
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-electric-gradient rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(34,211,238,0.3)]">
+                  <i className="fas fa-gavel text-white text-2xl md:text-3xl"></i>
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-2 md:mb-3">2. {t("placeBidsTitle")}</h3>
-                <p className="text-sm md:text-base text-gray-600">{t("placeBidsDesc")}</p>
+                <h3 className="text-xl font-black text-white mb-3">2. {t("placeBidsTitle")}</h3>
+                <p className="text-white/70">{t("placeBidsDesc")}</p>
               </div>
 
               {/* Step 3 */}
               <div className="text-center">
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                  <i className="fas fa-trophy text-white text-lg md:text-xl"></i>
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-sunset-gradient rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(234,179,8,0.3)]">
+                  <i className="fas fa-trophy text-white text-2xl md:text-3xl"></i>
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-2 md:mb-3">3. {t("winTitle")}</h3>
-                <p className="text-sm md:text-base text-gray-600">{t("winDesc")}</p>
+                <h3 className="text-xl font-black text-white mb-3">3. {t("winTitle")}</h3>
+                <p className="text-white/70">{t("winDesc")}</p>
               </div>
             </div>
 
             {/* Key Features */}
-            <div className="border-t border-gray-200 pt-6 md:pt-8">
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6 text-center">{t("keyFeatures")}</h3>
-              <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-                <div className="flex items-start space-x-3 md:space-x-4">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <i className="fas fa-clock text-blue-600 text-sm"></i>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1 md:mb-2 text-sm md:text-base">{t("timerResets")}</h4>
-                    <p className="text-gray-600 text-sm md:text-base">{t("timerResetsDesc")}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-3 md:space-x-4">
-                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <i className="fas fa-coins text-green-600 text-sm"></i>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1 md:mb-2 text-sm md:text-base">{t("lowBidCost")}</h4>
-                    <p className="text-gray-600 text-sm md:text-base">{t("lowBidCostDesc")}</p>
+            <div className="border-t border-neon-400/20 pt-12">
+              <h3 className="text-2xl md:text-3xl font-black text-transparent bg-gradient-to-r from-white to-neon-200 bg-clip-text mb-8 text-center">
+                {t("keyFeatures")}
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-gray-800/40 backdrop-blur-sm rounded-2xl p-6 border border-brand-400/20">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-brand-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <i className="fas fa-clock text-brand-400 text-xl"></i>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white text-lg mb-2">{t("timerResets")}</h4>
+                      <p className="text-white/70">{t("timerResetsDesc")}</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3 md:space-x-4">
-                  <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <i className="fas fa-users text-purple-600 text-sm"></i>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1 md:mb-2 text-sm md:text-base">{t("realCompetition")}</h4>
-                    <p className="text-gray-600 text-sm md:text-base">{t("realCompetitionDesc")}</p>
+                <div className="bg-gray-800/40 backdrop-blur-sm rounded-2xl p-6 border border-electric-400/20">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-electric-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <i className="fas fa-coins text-electric-400 text-xl"></i>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white text-lg mb-2">{t("lowBidCost")}</h4>
+                      <p className="text-white/70">{t("lowBidCostDesc")}</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3 md:space-x-4">
-                  <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <i className="fas fa-bolt text-red-600 text-sm"></i>
+                <div className="bg-gray-800/40 backdrop-blur-sm rounded-2xl p-6 border border-neon-400/20">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-neon-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <i className="fas fa-users text-neon-400 text-xl"></i>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white text-lg mb-2">{t("realCompetition")}</h4>
+                      <p className="text-white/70">{t("realCompetitionDesc")}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1 md:mb-2 text-sm md:text-base">{t("fastResults")}</h4>
-                    <p className="text-gray-600 text-sm md:text-base">{t("fastResultsDesc")}</p>
+                </div>
+
+                <div className="bg-gray-800/40 backdrop-blur-sm rounded-2xl p-6 border border-sunset-400/20">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-sunset-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <i className="fas fa-bolt text-sunset-400 text-xl"></i>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white text-lg mb-2">{t("fastResults")}</h4>
+                      <p className="text-white/70">{t("fastResultsDesc")}</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Tips Section */}
-            <div className="border-t border-gray-200 pt-6 md:pt-8 mt-6 md:mt-8">
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6 text-center">{t("successTips")}</h3>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                <div className="bg-blue-50 rounded-lg p-3 md:p-4">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <i className="fas fa-lightbulb text-blue-600 text-sm"></i>
-                    <span className="font-semibold text-gray-900 text-sm md:text-base">{t("timingStrategy")}</span>
+            <div className="border-t border-neon-400/20 pt-12 mt-12">
+              <h3 className="text-2xl md:text-3xl font-black text-transparent bg-gradient-to-r from-white to-neon-200 bg-clip-text mb-8 text-center">
+                {t("successTips")}
+              </h3>
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="bg-gray-800/40 backdrop-blur-sm rounded-2xl p-6 border border-brand-400/20">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <i className="fas fa-lightbulb text-brand-400 text-xl"></i>
+                    <span className="font-bold text-white">{t("timingStrategy")}</span>
                   </div>
-                  <p className="text-xs md:text-sm text-gray-600">{t("timingStrategyDesc")}</p>
+                  <p className="text-white/70">{t("timingStrategyDesc")}</p>
                 </div>
 
-                <div className="bg-green-50 rounded-lg p-3 md:p-4">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <i className="fas fa-chart-line text-green-600 text-sm"></i>
-                    <span className="font-semibold text-gray-900 text-sm md:text-base">{t("studyHistory")}</span>
+                <div className="bg-gray-800/40 backdrop-blur-sm rounded-2xl p-6 border border-electric-400/20">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <i className="fas fa-chart-line text-electric-400 text-xl"></i>
+                    <span className="font-bold text-white">{t("studyHistory")}</span>
                   </div>
-                  <p className="text-xs md:text-sm text-gray-600">{t("studyHistoryDesc")}</p>
+                  <p className="text-white/70">{t("studyHistoryDesc")}</p>
                 </div>
 
-                <div className="bg-purple-50 rounded-lg p-3 md:p-4">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <i className="fas fa-wallet text-purple-600 text-sm"></i>
-                    <span className="font-semibold text-gray-900 text-sm md:text-base">{t("manageBudget")}</span>
+                <div className="bg-gray-800/40 backdrop-blur-sm rounded-2xl p-6 border border-neon-400/20">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <i className="fas fa-wallet text-neon-400 text-xl"></i>
+                    <span className="font-bold text-white">{t("manageBudget")}</span>
                   </div>
-                  <p className="text-xs md:text-sm text-gray-600">{t("manageBudgetDesc")}</p>
+                  <p className="text-white/70">{t("manageBudgetDesc")}</p>
                 </div>
               </div>
             </div>
@@ -829,20 +890,21 @@ export default function AuctionDetail() {
       {/* Floating Participant Badge */}
       {stats?.uniqueParticipants && stats.uniqueParticipants > 0 && (
         <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 md:bottom-6 z-50">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-full px-3 py-2 md:px-4 md:py-3 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-            <div className="flex items-center space-x-2 md:space-x-3">
-              <div className="w-2 h-2 md:w-3 md:h-3 bg-green-400 rounded-full animate-pulse"></div>
+          <div className="bg-gray-900/80 backdrop-blur-xl rounded-full px-4 py-3 border border-brand-400/30 shadow-[0_0_30px_rgba(14,165,233,0.2)]">
+            <div className="flex items-center space-x-3">
+              <div className="w-3 h-3 bg-brand-400 rounded-full animate-pulse" />
               <div className="text-white">
-                <span className="text-base md:text-lg font-bold">{stats.uniqueParticipants}</span>
-                <span className="ml-1 md:ml-2 text-xs md:text-sm">{t("participants")}</span>
+                <span className="text-lg font-black">{stats?.uniqueParticipants}</span>
+                <span className="ml-2 text-sm text-white/80">{t("participants")}</span>
               </div>
-              <div className="w-6 h-6 md:w-8 md:h-8 bg-white/20 rounded-full flex items-center justify-center">
-                <i className="fas fa-users text-white text-xs md:text-sm"></i>
+              <div className="w-8 h-8 bg-brand-500/20 rounded-full flex items-center justify-center">
+                <i className="fas fa-users text-brand-400" />
               </div>
             </div>
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 }

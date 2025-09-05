@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
 export default function AuctionRules() {
-  useDocumentTitle("Правила аукционов -  Deshevshe.ua | Условия участия в пенни-аукционах");
+  useDocumentTitle("Правила аукционов - Deshevshe.ua | Условия участия в пенни-аукционах");
   const { formatCurrency } = useSettings();
   const { t } = useLanguage();
 
@@ -19,7 +19,7 @@ export default function AuctionRules() {
       title: "Как начать участие",
       color: "green",
       rules: [
-        "Зарегистрируйтесь на сайте  Deshevshe.ua",
+        "Зарегистрируйтесь на сайте Deshevshe.ua",
         "Пополните баланс бидов через удобный способ оплаты",
         "Выберите интересующий вас аукцион",
         "Дождитесь начала аукциона и начинайте делать ставки"
@@ -177,7 +177,7 @@ export default function AuctionRules() {
                   animation="calmInUp"
                   delay={0.2}
                 >
-                  Ознакомьтесь с правилами участия в пенни-аукционах  Deshevshe.ua для честной и безопасной игры.
+                  Ознакомьтесь с правилами участия в пенни-аукционах Deshevshe.ua для честной и безопасной игры.
                 </AnimatedText>
               </div>
             </div>
@@ -340,7 +340,7 @@ export default function AuctionRules() {
                   {[
                     { title: "Ответственность участника", desc: "Участвуя в аукционах, вы соглашаетесь с тем, что понимаете принцип работы пенни-аукционов и принимаете возможные риски.", color: 'sunset' },
                     { title: "Техническая поддержка", desc: "При технических проблемах во время аукциона немедленно обратитесь в службу поддержки. Компенсация возможна только при подтвержденных технических неполадках.", color: 'brand' },
-                    { title: "Честная игра", desc: " Deshevshe.ua стремится обеспечить честные и прозрачные аукционы для всех участников. Мы постоянно мониторим систему для предотвращения мошенничества.", color: 'electric' }
+                    { title: "Честная игра", desc: "Deshevshe.ua стремится обеспечить честные и прозрачные аукционы для всех участников. Мы постоянно мониторим систему для предотвращения мошенничества.", color: 'electric' }
                   ].map((note, index) => (
                     <motion.div 
                       key={index} 

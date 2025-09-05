@@ -17,7 +17,7 @@ export default function Auctions() {
   const { t } = useLanguage();
   const { connected } = useSocket();
 
-  useDocumentTitle(`${t("upcomingAuctions")} -  Deshevshe.ua | Скоро начнутся новые торги`);
+  useDocumentTitle(`${t("upcomingAuctions")} - Deshevshe.ua | Скоро начнутся новые торги`);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentTime, setCurrentTime] = useState(Date.now());
   const auctionsPerPage = 12;

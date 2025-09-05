@@ -16,7 +16,7 @@ export function useSettings() {
   const defaultSettings = { 
     currency: "сом", 
     currencySymbol: "сом", 
-    siteName: " Deshevshe.ua", 
+    siteName: "Deshevshe.ua", 
     language: "ru",
     headerTagline: "Пенни-аукционы в Кыргызстане",
     footerDescription: "Первая пенни-аукционная платформа в Кыргызстане. Выигрывайте премиальные товары за копейки с нашей честной и прозрачной системой аукционов."
