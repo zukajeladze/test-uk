@@ -30,7 +30,7 @@ export default function Support() {
       icon: "fab fa-telegram",
       title: "Telegram",
       description: "Свяжитесь с нами через Telegram для оперативной поддержки",
-      contact: "@qbids_support",
+      contact: "@deshevshe_support",
       responseTime: "В рабочее время",
       color: "blue"
     }

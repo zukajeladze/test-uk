@@ -73,7 +73,7 @@ export default function AdminSettings() {
       language: settings?.language || "ru",
       headerTagline: settings?.headerTagline || "Пенни-аукционы в Украине",
       footerDescription: settings?.footerDescription || "Первая пенни-аукционная платформа в Украине. Выигрывайте премиальные товары за копейки с нашей честной и прозрачной системой аукционов.",
-      contactAddress: settings?.contactAddress || "г. Бишкек, ул. Чуй 154",
+      contactAddress: settings?.contactAddress || "вул. Хрещатик, 15, Київ, 01001, Україна",
       contactPhone: settings?.contactPhone || "+996 (555) 123-456",
       contactEmail: settings?.contactEmail || "info@Deshevshe.ua",
     },
@@ -87,7 +87,7 @@ export default function AdminSettings() {
         currencySymbol: settings.currencySymbol,
         siteName: settings.siteName,
         language: settings.language,
-        contactAddress: settings.contactAddress || "г. Бишкек, ул. Чуй 154",
+        contactAddress: settings.contactAddress || "вул. Хрещатик, 15, Київ, 01001, Україна",
         contactPhone: settings.contactPhone || "+996 (555) 123-456",
         contactEmail: settings.contactEmail || "info@Deshevshe.ua",
       });
@@ -318,7 +318,7 @@ export default function AdminSettings() {
                         id="contactAddress"
                         {...form.register("contactAddress")}
                         className="h-11 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
-                        placeholder="г. Бишкек, ул. Чуй 154"
+                        placeholder="вул. Хрещатик, 15, Київ, 01001, Україна"
                       />
                     </div>
 
@@ -425,7 +425,7 @@ export default function AdminSettings() {
                   <div>
                     <div className="font-medium text-orange-900">Контактная информация</div>
                     <div className="text-sm text-orange-700 space-y-1">
-                      <div><i className="fas fa-map-marker-alt mr-2"></i>{settings?.contactAddress || "г. Бишкек, ул. Чуй 154"}</div>
+                      <div><i className="fas fa-map-marker-alt mr-2"></i>{settings?.contactAddress || "вул. Хрещатик, 15, Київ, 01001, Україна"}</div>
                       <div><i className="fas fa-phone mr-2"></i>{settings?.contactPhone || "+996 (555) 123-456"}</div>
                       <div><i className="fas fa-envelope mr-2"></i>{settings?.contactEmail || "info@Deshevshe.ua"}</div>
                     </div>

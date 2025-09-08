@@ -97,7 +97,7 @@ export const settings = pgTable("settings", {
   language: text("language").notNull().default("ru"),
   headerTagline: text("header_tagline").default("Пенни-аукционы в Украине"),
   footerDescription: text("footer_description").default("Первая пенни-аукционная платформа в Украине. Выигрывайте премиальные товары за копейки с нашей честной и прозрачной системой аукционов."),
-  contactAddress: text("contact_address").default("г. Бишкек, ул. Чуй 154"),
+  contactAddress: text("contact_address").default("вул. Хрещатик, 15, Київ, 01001, Україна"),
   contactPhone: text("contact_phone").default("+996 (555) 123-456"),
   contactEmail: text("contact_email").default("info@Deshevshe.ua"),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),

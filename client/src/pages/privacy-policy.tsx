@@ -422,7 +422,7 @@ export default function PrivacyPolicy() {
                   <h4 className="font-black text-white">Додаткова інформація</h4>
                   <div className="space-y-3 text-white/70">
                     <p>За потреби звертайтеся до органів захисту прав споживачів</p>
-                    <p>Гаряча лінія: 0-800-XXX-XXX</p>
+                    <p>Гаряча лінія: XXX-XXX-XXX</p>
                     <p>Email: support@deshevshe.ua</p>
                   </div>
                 </div>

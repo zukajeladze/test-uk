@@ -1,12 +1,12 @@
 databases:
-  - name: qbids-postgres
-    databaseName: qbids
-    user: qbids
+  - name: deshevshe-postgres
+    databaseName: deshevshe
+    user: deshevshe
     plan: free
 
 services:
   - type: web
-    name: qbids-kg
+    name: deshevshe-kg
     env: node
     buildCommand: npm install && npm run db:push && npm run build
     startCommand: npm start
@@ -15,7 +15,7 @@ services:
         value: production
       - key: DATABASE_URL
         fromDatabase:
-          name: qbids-postgres
+          name: deshevshe-postgres
           property: connectionString
       - key: SESSION_SECRET
         generateValue: true

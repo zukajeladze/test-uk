@@ -181,7 +181,7 @@ export function Footer() {
             </h4>
             <div className="space-y-4">
               {[
-                { icon: "fas fa-map-marker-alt", text: "г. Бишкек, ул. Чуй 154", color: 'brand' },
+                { icon: "fas fa-map-marker-alt", text: "вул. Хрещатик, 15, Київ, 01001, Україна", color: 'brand' },
                 { icon: "fas fa-phone", text: "+996 (555) 123-456", color: 'electric' },
                 { icon: "fas fa-envelope", text: "info@Deshevshe.ua", color: 'neon' },
                 { icon: "fas fa-clock", text: t("support24x7"), color: 'sunset' }
