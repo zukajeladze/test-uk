@@ -57,7 +57,7 @@ export function Footer() {
               </h3>
             </motion.div>
             <p className="text-white/70 leading-relaxed">
-              {settings?.footerDescription || "Первая пенни-аукционная платформа в Кыргызстане. Выигрывайте премиальные товары за копейки с нашей честной и прозрачной системой аукционов."}
+              {settings?.footerDescription || "Первая пенни-аукционная платформа в Украине. Выигрывайте премиальные товары за копейки с нашей честной и прозрачной системой аукционов."}
             </p>
             <div className="flex space-x-4">
               {[
@@ -358,10 +358,10 @@ export function Footer() {
               }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              {settings?.language === "ru" && "Первая пенни-аукционная платформа в Кыргызстане"}
+              {settings?.language === "ru" && "Первая пенни-аукционная платформа в Украине"}
               {settings?.language === "en" && "First penny auction platform in Kyrgyzstan"}
               {settings?.language === "ka" && "პირველი პენი აუქციონის პლატფორმა ყირგიზეთში"}
-              {!settings?.language && "Первая пенни-аукционная платформа в Кыргызстане"}
+              {!settings?.language && "Первая пенни-аукционная платформа в Украине"}
             </motion.p>
           </div>
         </motion.div>

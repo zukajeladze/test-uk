@@ -107,7 +107,7 @@ export function Header() {
                   {settings?.siteName || "Deshevshe.ua"}
                 </motion.h1>
                 <p className="text-xs text-white/70 font-medium">
-                  {settings?.headerTagline || "Пенни-аукционы в Кыргызстане"}
+                  {settings?.headerTagline || "Пенни-аукционы в Украине"}
                 </p>
               </div>
               <div className="sm:hidden">

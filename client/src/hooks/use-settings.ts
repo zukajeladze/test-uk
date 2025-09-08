@@ -18,8 +18,8 @@ export function useSettings() {
     currencySymbol: "сом", 
     siteName: "Deshevshe.ua", 
     language: "ru",
-    headerTagline: "Пенни-аукционы в Кыргызстане",
-    footerDescription: "Первая пенни-аукционная платформа в Кыргызстане. Выигрывайте премиальные товары за копейки с нашей честной и прозрачной системой аукционов."
+    headerTagline: "Пенни-аукционы в Украине",
+    footerDescription: "Первая пенни-аукционная платформа в Украине. Выигрывайте премиальные товары за копейки с нашей честной и прозрачной системой аукционов."
   };
   const currentSettings = settings || defaultSettings;
 
